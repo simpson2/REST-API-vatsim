@@ -5,6 +5,5 @@ and provide data based on search parameters
 
 ## Current endpoints
 
-localhost:3000/ - confirms server online
-
+localhost:3000/ - confirms server online  
 localhost:3000/vatsim - displays the entire JSON data
