@@ -1,7 +1,7 @@
 # REST-API-vatsim
 
 This is a RESTful API created to take the [the entire VATSIM JSON data](http://eu.data.vatsim.net/vatsim-data.json)
-and provide data based on search parameters
+and provide selected data based on the implemented endpoints
 
 ## Current endpoints
 
