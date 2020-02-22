@@ -1,0 +1,24 @@
+{
+  "name": "rest_api_vatsim",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simpson2/REST-API-vatsim.git"
+  },
+  "author": "Saulius Baltramonaitis",
+  "license": "GPL-3.0-only",
+  "bugs": {
+    "url": "https://github.com/simpson2/REST-API-vatsim/issues"
+  },
+  "homepage": "https://github.com/simpson2/REST-API-vatsim#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "node-fetch": "^2.6.0"
+  }
+}
