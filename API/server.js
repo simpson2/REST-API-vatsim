@@ -18,4 +18,5 @@ if (port == null || port == "") {
 }
 app.listen(port, () => {
     console.log("App running on port " + port);
+    console.log("Server address: localhost:"+port);
 })
