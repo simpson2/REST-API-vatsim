@@ -7,3 +7,4 @@ and provide data based on search parameters
 
 * localhost:3000/ - confirms server online  
 * localhost:3000/vatsim - displays the entire JSON data
+* localhost:3000/online - displays number of connected pilots and controllers
