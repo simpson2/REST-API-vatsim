@@ -1,4 +1,5 @@
-const getData = require("./requestVATSIMData");
+const getData = require("../functions/requestVATSIMData");
+const determineVoiceStatus = require("../functions/determineVoiceStatus");
 
 const getHome = (req, res) => {
     return res.json({ Info: 'Node.JS, Express', Server: 'Online' });
@@ -33,8 +34,26 @@ const getOnline = async (req, res) => {
     }
 }
 
+const getVoiceStatus = async (req, res) => {
+    const data = await getData();
+    const pilots = data.pilots;
+    let remarks = [];
+    
+    try{
+        for(i = 0; i < pilots.length; i++) {
+            remarks[i] = pilots[i].plan.remarks;
+        }
+        const output = determineVoiceStatus(remarks)
+        res.json(output);
+    }
+    catch(err) {
+        console.log(err);
+    }
+}
+
 module.exports = {
     getHome,
     getVatsim,
-    getOnline
+    getOnline,
+    getVoiceStatus
 }
