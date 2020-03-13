@@ -1,5 +1,6 @@
 const getData = require("../functions/requestVATSIMData");
 const determineVoiceStatus = require("../functions/determineVoiceStatus");
+const remarkSearch = require("../functions/remarkSearch");
 
 const getHome = (req, res) => {
     return res.json({ Info: 'Node.JS, Express', Server: 'Online' });
@@ -51,9 +52,24 @@ const getVoiceStatus = async (req, res) => {
     }
 }
 
+const getPilotsByRemarks = async (req, res) => {
+    const remarkParam = req.params.remarks;
+    const data = await getData();
+    const pilots = data.pilots;
+    
+    try{
+        const output = remarkSearch(pilots, remarkParam);
+        res.json(output);
+    }
+    catch(err) {
+        console.log(err);
+    }
+}
+
 module.exports = {
     getHome,
     getVatsim,
     getOnline,
-    getVoiceStatus
+    getVoiceStatus,
+    getPilotsByRemarks
 }
