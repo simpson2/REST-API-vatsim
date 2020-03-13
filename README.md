@@ -1,5 +1,7 @@
 # REST-API-vatsim
 
+[![Build Status](https://travis-ci.org/simpson2/REST-API-vatsim.svg?branch=master)](https://travis-ci.org/simpson2/REST-API-vatsim)
+
 This is a RESTful API created to take the [the entire VATSIM JSON data](http://eu.data.vatsim.net/vatsim-data.json)
 and provide selected data based on the implemented endpoints
 
