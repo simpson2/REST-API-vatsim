@@ -1,9 +1,17 @@
-const expect = require("chai").expect;
-const server = require("../API/server");
+const chai = require("chai");
+const expect = chai.expect;
+const chaiHttp = require("chai-http");
+const app = require("../API/server");
 
-describe("test", () => {
-    it("should return JSON response indicating server is online", () => {
-        expect({"Info":"Node.JS, Express","Server":"Online"})
-        .to.eql({"Info":"Node.JS, Express","Server":"Online"});
+chai.use(chaiHttp);
+
+describe("Server online", () => {
+    it("responds with code 200", (done) => {
+        chai.request(app)
+        .get("/")
+        .end((err, res) => {
+            expect(res).to.have.status(200);
+            done();
+        });
     });
 });
