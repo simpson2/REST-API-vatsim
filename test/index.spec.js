@@ -15,3 +15,37 @@ describe("Server online", () => {
         });
     });
 });
+describe("GET", () => {
+    it("/vatsim", (done) => {
+        chai.request(app)
+        .get("/vatsim")
+        .end((err, res) => {
+            expect(res.body).to.be.an("object");
+            done();
+        });
+    });
+    it("/vatsim/online", (done) => {
+        chai.request(app)
+        .get("/vatsim/online")
+        .end((err, res) => {
+            expect(res.body).to.be.an("object");
+            done();
+        });
+    });
+    it("/vatsim/voicestatus", (done) => {
+        chai.request(app)
+        .get("/vatsim/voicestatus")
+        .end((err, res) => {
+            expect(res.body).to.be.an("object");
+            done();
+        });
+    });
+    it("/vatsim/pilots/", (done) => {
+        chai.request(app)
+        .get("/vatsim/pilots/")
+        .end((err, res) => {
+            expect(res.body).to.be.an("object");
+            done();
+        });
+    });
+});
