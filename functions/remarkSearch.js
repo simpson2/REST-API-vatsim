@@ -1,16 +1,18 @@
-function remarkSearch(pilots, remarkParam) {
+function remarkSearch(clients, remarkParam) {
     
     const pattern = new RegExp("^.*" + remarkParam + ".*$", "i");
     const pilotAndRemarks = {};
     let id = 0;
 
-    for(i = 0; i < pilots.length; i++) {
-        if(pattern.test([pilots[i].plan.remarks])) {
+    for(i = 0; i < clients.length; i++) {
+        let client = clients[i];
+
+        if(pattern.test([client.planned_remarks])) {
             id++;
 
-            pilotAndRemarks["Pilot Name "+id] = pilots[i].member.name;
-            pilotAndRemarks["Pilot CID "+id] = pilots[i].member.cid;
-            pilotAndRemarks["Remarks "+id] = pilots[i].plan.remarks;
+            pilotAndRemarks["Pilot Name "+id] = client.realname;
+            pilotAndRemarks["Pilot CID "+id] = client.cid;
+            pilotAndRemarks["Remarks "+id] = client.planned_remarks;
         }
     }
 
