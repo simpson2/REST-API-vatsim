@@ -11,23 +11,26 @@ const getVatsim = async (req, res) => {
     return res.json(data);
 }
 
-const getOnline = async (req, res) => {
+const getOnline = async (req, res) => { //TODO number of controllers
     const data = await getData();
 
     let output = {};
     try {
-        let p = 0;
-        for(pilot in data.pilots) {
-            p += 1;
-        }
 
-        let c = 0
-        for(controller in data.controllers) {
-            c += 1;
+        let p = 0;
+        let numClients = data.clients.length;
+
+        for(i = 0; i < numClients; i++) {
+            let client = data.clients[i];
+            
+            if(client.clienttype === "PILOT") {
+                p += 1;
+            }
         }
 
         output["pilots"] = p;
-        output["controllers"] = c;
+        output["total clients"] = numClients;
+
         res.json(output);
     }
     catch(err) {
@@ -37,13 +40,18 @@ const getOnline = async (req, res) => {
 
 const getVoiceStatus = async (req, res) => {
     const data = await getData();
-    const pilots = data.pilots;
+    const clients = data.clients;
     let remarks = [];
     
     try{
-        for(i = 0; i < pilots.length; i++) {
-            remarks[i] = pilots[i].plan.remarks;
+        for(i = 0; i < clients.length; i++) {
+            let client = clients[i];
+
+            if(client.clienttype === "PILOT"){
+                remarks[i] = client.planned_remarks;
+            }
         }
+
         const output = determineVoiceStatus(remarks)
         res.json(output);
     }
@@ -55,10 +63,10 @@ const getVoiceStatus = async (req, res) => {
 const getPilotsByRemarks = async (req, res) => {
     const remarkParam = req.params.remarks;
     const data = await getData();
-    const pilots = data.pilots;
+    const clients = data.clients;
     
     try{
-        const output = remarkSearch(pilots, remarkParam);
+        const output = remarkSearch(clients, remarkParam);
         res.json(output);
     }
     catch(err) {
