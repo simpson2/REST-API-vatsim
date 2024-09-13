@@ -1,12 +1,12 @@
 const fetch = require("node-fetch");
-const vatsim = "http://eu.data.vatsim.net/vatsim-data.json";
+const vatsim = "https://data.vatsim.net/v3/vatsim-data.json";
 
 async function getData() {
     try {
         const res = await fetch(vatsim);
         const data = await res.json();
         //console.log(res);
-        
+
 
         return data;
     }
