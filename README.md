@@ -11,4 +11,6 @@ and provide selected data based on the implemented endpoints
 * /vatsim/voicestatus - displays all possible voice statuses and number of connections for each voice status
 * /vatsim/pilots/:remarkSearchParameter - displays pilots, their CID and their remarks whose remarks (partially or fully) contain the remarkSearchParameter word
 
+### Deployment
+
 * Deployed version can be found on [Render](https://rest-api-vatsim.onrender.com/)
