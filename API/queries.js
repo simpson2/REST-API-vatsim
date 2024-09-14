@@ -9,8 +9,7 @@ const getHome = (req, res) => {
 }
 
 const getVatsim = async (req, res) => {
-    const data = await getData();
-    return res.json(data);
+    return res.json((await getData()));
 }
 
 const getOnline = async (req, res) => {
@@ -19,13 +18,9 @@ const getOnline = async (req, res) => {
     let output = {};
     try {
 
-        let numPilots = data.pilots.length;
-        let numControllers = data.controllers.length;
-        let uniqueUsers = numPilots + numControllers;
-
-        output["pilots"] = numPilots;
-        output["controllers"] = numControllers;
-        output["unique users"] = uniqueUsers;
+        output["pilots"] = data.pilots.length;
+        output["controllers"] = data.controllers.length;
+        output["unique users"] = data.pilots.length + data.controllers.length;
 
         res.json(output);
     }
@@ -36,19 +31,11 @@ const getOnline = async (req, res) => {
 
 const getVoiceStatus = async (req, res) => {
     const data = await getData();
-    const clients = data.clients;
-    let remarks = [];
+    const pilots = data.pilots;
 
     try{
-        for(i = 0; i < clients.length; i++) {
-            let client = clients[i];
 
-            if(client.clienttype === "PILOT"){
-                remarks[i] = client.planned_remarks;
-            }
-        }
-
-        const output = determineVoiceStatus(remarks)
+        const output = determineVoiceStatus(pilots);
         res.json(output);
     }
     catch(err) {

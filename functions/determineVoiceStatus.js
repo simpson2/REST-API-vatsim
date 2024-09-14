@@ -2,7 +2,7 @@ const voiceRegex = /\/(v|V)\//;
 const receiveRegex = /\/(r|R)\//;
 const textRegex = /\/(t|T)\//;
 
-function determineVoiceStatus(remarks) {
+function determineVoiceStatus(pilots) {
 
     let v = 0;
     let r = 0;
@@ -10,10 +10,11 @@ function determineVoiceStatus(remarks) {
     let u = 0;
     let output = {};
 
-    for(i = 0; i < remarks.length; i++) {
-        if(voiceRegex.test(remarks[i])) v += 1;
-        else if(receiveRegex.test(remarks[i])) r += 1;
-        else if(textRegex.test(remarks[i])) t += 1;
+    for(i = 0; i < pilots.length; i++) {
+
+        if(pilots[i].flight_plan !== null && voiceRegex.test(pilots[i].flight_plan.remarks)) v += 1;
+        else if(pilots[i].flight_plan !== null && receiveRegex.test(pilots[i].flight_plan.remarks)) r += 1;
+        else if(pilots[i].flight_plan !== null && textRegex.test(pilots[i].flight_plan.remarks)) t += 1;
         else u += 1;
     }
 
