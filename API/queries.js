@@ -3,7 +3,9 @@ const determineVoiceStatus = require("../functions/determineVoiceStatus");
 const remarkSearch = require("../functions/remarkSearch");
 
 const getHome = (req, res) => {
-    return res.json({ Info: 'Node.JS, Express', Server: 'Online' });
+    let date = new Date();
+    let zuluTime = date.getUTCHours().toString() + ":" + date.getUTCMinutes().toString() + ":" + date.getUTCSeconds().toString() + "z";
+    return res.json({ Info: 'Node.JS, Express', Server: 'Online', Time: zuluTime });
 }
 
 const getVatsim = async (req, res) => {
@@ -11,25 +13,19 @@ const getVatsim = async (req, res) => {
     return res.json(data);
 }
 
-const getOnline = async (req, res) => { //TODO number of controllers
+const getOnline = async (req, res) => {
     const data = await getData();
 
     let output = {};
     try {
 
-        let p = 0;
-        let numClients = data.clients.length;
+        let numPilots = data.pilots.length;
+        let numControllers = data.controllers.length;
+        let uniqueUsers = numPilots + numControllers;
 
-        for(i = 0; i < numClients; i++) {
-            let client = data.clients[i];
-            
-            if(client.clienttype === "PILOT") {
-                p += 1;
-            }
-        }
-
-        output["pilots"] = p;
-        output["total clients"] = numClients;
+        output["pilots"] = numPilots;
+        output["controllers"] = numControllers;
+        output["unique users"] = uniqueUsers;
 
         res.json(output);
     }
@@ -42,7 +38,7 @@ const getVoiceStatus = async (req, res) => {
     const data = await getData();
     const clients = data.clients;
     let remarks = [];
-    
+
     try{
         for(i = 0; i < clients.length; i++) {
             let client = clients[i];
@@ -64,7 +60,7 @@ const getPilotsByRemarks = async (req, res) => {
     const remarkParam = req.params.remarks;
     const data = await getData();
     const clients = data.clients;
-    
+
     try{
         const output = remarkSearch(clients, remarkParam);
         res.json(output);
