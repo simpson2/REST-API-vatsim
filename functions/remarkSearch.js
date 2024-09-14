@@ -1,22 +1,29 @@
-function remarkSearch(clients, remarkParam) {
-    
-    const pattern = new RegExp("^.*" + remarkParam + ".*$", "i");
-    const pilotAndRemarks = {};
+function remarkSearch(pilots, remarkParam) {
+
     let id = 0;
+    const pattern = new RegExp("^.*" + remarkParam + ".*$", "i");
+    const output = {};
 
-    for(i = 0; i < clients.length; i++) {
-        let client = clients[i];
+    output["total"] = id;
+    output["matches"] = {};
 
-        if(pattern.test([client.planned_remarks])) {
+    for(i = 0; i < pilots.length; i++) {
+
+        let pilot = pilots[i];
+
+        if(pilot.flight_plan !== null && pattern.test([pilot.flight_plan.remarks])) {
+
             id++;
 
-            pilotAndRemarks["Pilot Name "+id] = client.realname;
-            pilotAndRemarks["Pilot CID "+id] = client.cid;
-            pilotAndRemarks["Remarks "+id] = client.planned_remarks;
+            output["total"] = id;
+
+            output["matches"][`Pilot Name ${id}`] = pilot.name;
+            output["matches"][`Pilot CID ${id}`] = pilot.cid;
+            output["matches"][`Remarks ${id}`] = pilot.flight_plan.remarks;
         }
     }
 
-    return pilotAndRemarks;
+    return output;
 }
 
 module.exports = remarkSearch;

@@ -46,10 +46,10 @@ const getVoiceStatus = async (req, res) => {
 const getPilotsByRemarks = async (req, res) => {
     const remarkParam = req.params.remarks;
     const data = await getData();
-    const clients = data.clients;
+    const pilots = data.pilots;
 
     try{
-        const output = remarkSearch(clients, remarkParam);
+        const output = remarkSearch(pilots, remarkParam);
         res.json(output);
     }
     catch(err) {
