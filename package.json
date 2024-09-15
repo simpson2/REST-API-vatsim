@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "name": "rest_api_vatsim",
   "version": "1.0.0",
   "description": "",

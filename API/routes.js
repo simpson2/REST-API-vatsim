@@ -1,14 +1,14 @@
-const queries = require("./queries")
+import * as Queries from "./queries.js";
 
-var appRoutes = (app) => {
-    
-    app.get("/", queries.getHome);
-    app.get("/vatsim", queries.getVatsim);
-    app.get("/vatsim/online", queries.getOnline);
-    app.get("/vatsim/voicestatus", queries.getVoiceStatus);
-    app.get("/vatsim/pilots/:remarks", queries.getPilotsByRemarks);
+var routes = (app) => {
+
+    app.get("/", Queries.getHome);
+    app.get("/vatsim", Queries.getVatsim);
+    app.get("/vatsim/online", Queries.getOnline);
+    app.get("/vatsim/voicestatus", Queries.getVoiceStatus);
+    app.get("/vatsim/pilots/:remarks", Queries.getPilotsByRemarks);
     //app.get("/vatsim/receive", queries.byReceive);
     //app.get("/vatsim/text", queries.byText);
 }
 
-module.exports = appRoutes;
+export { routes };

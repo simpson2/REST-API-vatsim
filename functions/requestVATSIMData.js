@@ -1,18 +1,19 @@
-const fetch = require("node-fetch");
+import fetch from "node-fetch";
 const vatsim = "https://data.vatsim.net/v3/vatsim-data.json";
 
+let data;
+let res;
+
 async function getData() {
+
     try {
-        const res = await fetch(vatsim);
-        const data = await res.json();
-        //console.log(res);
+        res = await fetch(vatsim);
+        data = await res.json();
 
-
-        return data;
     }
     catch(err) {
-        return JSON.stringify({ERROR: err});
+        data = JSON.stringify({ERROR: err});
     }
-}
+};
 
-module.exports = getData;
+export { data, getData };

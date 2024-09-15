@@ -1,5 +1,7 @@
-const express = require("express");
-const routes = require("./routes");
+import express from "express";
+import { getData } from "../functions/requestVATSIMData.js";
+import { routes } from "./routes.js";
+
 const app = express();
 
 routes(app);
@@ -13,4 +15,12 @@ app.listen(port, () => {
     console.log('Server address "localhost:'+port+'"');
 })
 
-module.exports = app;
+console.log("Fetching API data now");
+getData();
+const interval = setInterval(() => {
+    let date = new Date();
+    let zuluTime = date.getUTCHours().toString() + ":" + date.getUTCMinutes().toString() + ":" + date.getUTCSeconds().toString() + "z";
+
+    console.log("Fetching API data at time " + zuluTime);
+    getData();
+}, 30000);

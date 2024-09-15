@@ -7,7 +7,7 @@ function remarkSearch(pilots, remarkParam) {
     output["total"] = id;
     output["matches"] = {};
 
-    for(i = 0; i < pilots.length; i++) {
+    for(let i = 0; i < pilots.length; i++) {
 
         let pilot = pilots[i];
 
@@ -20,10 +20,10 @@ function remarkSearch(pilots, remarkParam) {
             output["matches"][`Pilot Name ${id}`] = pilot.name;
             output["matches"][`Pilot CID ${id}`] = pilot.cid;
             output["matches"][`Remarks ${id}`] = pilot.flight_plan.remarks;
-        }
-    }
+        };
+    };
 
     return output;
 }
 
-module.exports = remarkSearch;
+export { remarkSearch };
